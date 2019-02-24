@@ -48,6 +48,8 @@ header {
 }
 
 .menu {
+  display: flex;
+  justify-content: flex-end;
   padding: 16px 48px;
 }
 
@@ -59,7 +61,7 @@ header {
 }
 
 .menu a:last-child {
-  margin-right: 0;
+  margin-left: auto;
 }
 
 .menu .btn-search img {
