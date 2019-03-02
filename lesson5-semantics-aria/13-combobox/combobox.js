@@ -77,11 +77,13 @@
             case VK_DOWN:
                 if (!this.listbox.hidden) {
                     this.listbox.nextActiveListItem();
+                    this.setActiveDescendant(this.listbox.activeItem);
                 }
                 break;
             case VK_UP:
                 if (!this.listbox.hidden) {
                     this.listbox.previousActiveListItem();
+                    this.setActiveDescendant(this.listbox.activeItem);
                 }
                 break;
             case VK_ENTER:
@@ -170,6 +172,12 @@
                 this.hide();
             } else {
                 // FIXME: ChromeVox reports the wrong list size and position
+                var index = 0;
+                for (var $item of this.visibleItems) {
+                    index++;
+                    $item.setAttribute('aria-posinset', index);
+                    $item.setAttribute('aria-setsize', this.visibleItems.length);
+                };
             }
         },
 
@@ -237,6 +245,8 @@
             newActive.classList.add('active');
 
             // FIXME: need to ensure focus stays on textbox, but report active list option
+            input.setAttribute('aria-describedby', newActive.id);
+
         }
     };
 
